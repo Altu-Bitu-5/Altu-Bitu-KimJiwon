@@ -21,7 +21,7 @@ def check(num):
         if num in visit:
             return False
         else:
-            visit[num] = 1
+            visit[num] = 1 # num이라는 key에 value로 1주기
 
 
 n = int(sys.stdin.readline())  # 20
