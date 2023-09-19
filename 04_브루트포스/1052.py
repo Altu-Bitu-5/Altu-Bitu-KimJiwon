@@ -19,3 +19,7 @@ while bin(n).count("1") > k:
     ans += 2**idx  # 2 ^ (idx) 만큼 더하기
     n += 2**idx  # 2 ^ (idx) 만큼 더하기
 print(ans)
+
+
+# n의 i번째 비트가 1인지
+# n & (1<<i)
