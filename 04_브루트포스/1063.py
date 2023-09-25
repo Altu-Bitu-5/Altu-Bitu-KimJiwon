@@ -2,10 +2,12 @@
 # 체스판을 벗어나는지, 킹이 돌 위에 올라가는지 예외 검사하기
 
 king, stone, N = input().split()
-k = list(map(int, [ord(king[0]) - 64, king[1]]))
-s = list(map(int, [ord(stone[0]) - 64, stone[1]]))
+k = list(
+    map(int, [ord(king[0]) - 64, king[1]])
+)  # A1, ord는 문자열을 아스키코드로 바꿔주며 A-64의 경우 1이 됨
+s = list(map(int, [ord(stone[0]) - 64, stone[1]]))  # A2
 
-# 이때 k와 s는 [1,1] [8,8]
+# 이때 k와 s는 [1,1] [1,2]
 
 # 딕셔너리 (이동 타입에 따라 dx와 dy 설정)
 move = {
@@ -21,16 +23,17 @@ move = {
 
 # 움직이는 횟수 만큼 실행
 for _ in range(int(N)):
-    m = input()  # 지금 이동
+    m = input()  # 지금 이동 R
 
-    # 움직였을 경우의 위치 : nx, ny
-    nx = k[0] + move[m][0]
-    ny = k[1] + move[m][1]
+    # 킹 움직였을 경우의 위치: nx, ny
+    nx = k[0] + move[m][0]  # 1
+    ny = k[1] + move[m][1]  # 0
 
     # 킹 조건 검사
     if 0 < nx <= 8 and 0 < ny <= 8:
         # 돌 위에 얹히는지
         if nx == s[0] and ny == s[1]:
+            # 돌 움직였을 경우의 위치: sx, sy
             sx = s[0] + move[m][0]
             sy = s[1] + move[m][1]
             # 돌 조건 검사
