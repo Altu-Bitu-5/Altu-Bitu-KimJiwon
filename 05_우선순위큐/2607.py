@@ -10,7 +10,7 @@ input = sys.stdin.readline
 
 
 N = int(input())
-target_str = input().strip()
+target_str = input().strip()  # 양 끝 공백 삭제
 str_list = [input().strip() for _ in range(N - 1)]
 ans = 0
 
@@ -18,7 +18,7 @@ for alpha_str in str_list:
     if (
         abs(len(alpha_str) - len(target_str)) > 1
         or len(set(target_str).difference(set(alpha_str))) > 1
-    ):  # alpha_str이 target_str과 길이와 구성하는 문자의 종류가 하나 넘게 차이가 나면 무시
+    ):  # alpha_str이 target_str과 길이와 구성하는 문자의 종류가 하나 넘게 차이가 나면 무시 -> set에 문자열을 넣으면 문자 단위로 쪼개짐
         continue
     for t in target_str:
         if t in alpha_str:
