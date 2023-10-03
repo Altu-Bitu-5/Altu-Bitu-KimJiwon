@@ -7,7 +7,7 @@ def solution(n, lost, reserve):
     set_lost = set(lost) - set(reserve)
     for i in set_reserve:
         if i - 1 in set_lost:
-            set_lost.remove(i - 1)  # 왼쪽 학생부터 빌려주고
+            set_lost.remove(i - 1)  # 왼쪽 학생부터 빌려주니 lost 집합에서 제거
         elif i + 1 in set_lost:
             set_lost.remove(i + 1)  # 오른쪽 학생 빌려주기
     return n - len(set_lost)
