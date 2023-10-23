@@ -1,11 +1,13 @@
 import sys
 from collections import deque
 
+# 매분마다 같은 계층을 봐야하니 bfs
+
 
 def solution(N, E, M, firstInfected):
     queue = deque([])  # 감염된 사람의 번호를 큐에 저장
-    answer = [-1] * (N + 1)  # solution 함수에서 리턴할 배열
-    turn = [0] * (N + 1)  # 감염까지 남은 주변 비감염 사람 수
+    answer = [-1] * (N + 1)  # [-1,-1,-1,-1,-1,-1,-1,-1]
+    turn = [0] * (N + 1)  # 감염까지 남은 주변 비감염자 수
 
     # 최조생성자 처리
     for t in firstInfected:
@@ -17,14 +19,14 @@ def solution(N, E, M, firstInfected):
     # 사람 i의 주변인물 수 + 1 / 2의 몫으로 저장해둔다.
     # 사람의 번호가 아닌 입력의 끝을 말하는 0이 adj 배열에 포함되어 있으므로 + 1은 안해도 된다.
     for i in range(1, N + 1):
-        turn[i] = (len(E[i])) // 2  # 1
+        turn[i] = (len(E[i])) // 2  # [0, 1, 1, 2, 1, 1, 0,0]
 
     while queue:  # 큐가 빌 때까지 탐색 -> 비어있다면 모든 탐색 종료
-        current = queue.popleft()  # 현재, 가장 먼저 감염된 사람의
-        for next in E[current]:  # 주변인물들에게
+        current = queue.popleft()  # 1을 꺼내고 -> 6을 꺼내고
+        for next in E[current]:  # 1의 주변인들에게
             if next == 0:
                 break
-            turn[next] -= 1  # 자신(주변인물)이 감염되기까지 남은 사람 수를 1 빼고
+            turn[next] -= 1  # 1의 주변인은 [2,3]이므로 turn값을 1씩 감소(왜냐면 2,3입장에서는 1이 감염이니까)
             if (
                 answer[next] == -1 and turn[next] <= 0
             ):  # 만약 아직 감염되지 않았고 주변인의 반 이상이 감염되었다면
